@@ -12,6 +12,9 @@ const Navbar = () => {
     }
 
     const handleSignInClick = () =>{
+        modalDispatch({
+            type:"OPEN_SIGNIN_MODAL"
+        })
 
     }
     return (

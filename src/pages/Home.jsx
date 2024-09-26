@@ -1,4 +1,4 @@
-import Modal from "../components/Modal";
+import Modal from "../components/SignUpModal";
 import Navbar from "../components/Navbar"
 
 const Home = () => {
