@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useModal } from '../context/modal-context';
 
 const Modal = () => {
-
-
+    const {modalDispatch} = useModal()
+    const closeModal = () =>{
+        modalDispatch({
+            type:"OPEN_SIGNUP_MODAL"
+        })
+    }
   return (
     <>
 
@@ -22,7 +27,7 @@ const Modal = () => {
                   SignUp
                 </h3>
                 <button
-         
+                    onClick={closeModal}
                   className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   <svg

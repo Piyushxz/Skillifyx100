@@ -2,6 +2,7 @@ import Modal from "../components/Modal";
 import Navbar from "../components/Navbar"
 
 const Home = () => {
+
     return (
         <>
             <Navbar />
@@ -29,7 +30,7 @@ const Home = () => {
             <div className="bg-black py-10 flex flex-col items-center">
                 <h1 className="text-3xl md:text-5xl font-extrabold font-montserrat text-white">Testimonials</h1>
             </div>
-            <Modal/>
+            
         </>
     )
 }
