@@ -1,32 +1,39 @@
 import React from 'react';
+import { useModal } from '../context/modal-context';
 
 const Card = ({data}) => {
 
     const {title,description,imageUrl,price} = data
+    const {modalDispatch} = useModal()
+    const handleBuyNowClick = () =>{
+        modalDispatch({
+            type:"OPEN_SIGNIN_MODAL"
+        })
+    }
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="#">
+      
         <img
           className="rounded-t-lg"
           src={imageUrl}
           alt="Tech acquisition"
         />
-      </a>
+      
       <div className="p-5">
-        <a href="#">
+        
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             
             {title}
           </h5>
-        </a>
+        
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           {description}
         </p>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
            Price :₹{price} 
         </p>
-        <a
-          href="#"
+        <button
+          onClick={handleBuyNowClick}
           className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-400 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Buy Now
@@ -45,7 +52,7 @@ const Card = ({data}) => {
               d="M1 5h12m0 0L9 1m4 4L9 9"
             />
           </svg>
-        </a>
+        </button>
       </div>
     </div>
   );
