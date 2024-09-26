@@ -1,10 +1,12 @@
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
+import Card from "../components/Card"
 const Courses = () =>{
     return(
         <>
-        <Sidebar/>
         <Navbar/>
+
+        <Card/>
         </>
     )
 }
