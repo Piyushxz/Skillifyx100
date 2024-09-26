@@ -1,9 +1,9 @@
 const Navbar = () => {
     return (
         <>
-            <div className="flex flex-col md:flex-row justify-between px-6 md:px-12 py-4 bg-cyan-200 items-center">
+            <div className="flex flex-col md:flex-row justify-between px-6 md:px-12 py-4 bg-white items-center">
                 <div className="font-montserrat mb-4 md:mb-0">
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black">
                         Coursera
                     </h1>
                 </div>
