@@ -4,6 +4,8 @@ import './App.css'
 import { useModal } from './context/modal-context'
 import Modal from './components/SignUpModal'
 import SignInModal from './components/SignInModal'
+import { Routes,Route } from 'react-router-dom'
+import Courses from './pages/Courses'
 function App() {
   const [count, setCount] = useState(0)
   
@@ -12,7 +14,11 @@ function App() {
 
   return (
     <>
-      <Home/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/courses' element={<Courses/>} />
+      </Routes>
+      
       {
         isSignUpModalOpen &&
         <Modal/>
@@ -22,6 +28,8 @@ function App() {
         isSignInModalOpen &&
         <SignInModal/>
       }
+      
+      
     </>
   )
 }

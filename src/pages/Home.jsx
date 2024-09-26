@@ -1,8 +1,11 @@
 import Modal from "../components/SignUpModal";
 import Navbar from "../components/Navbar"
-
+import { useNavigate } from "react-router-dom";
 const Home = () => {
-
+    const navigate = useNavigate()
+    const handleViewCoursesClick = () =>{
+        navigate("/courses")
+    }
     return (
         <>
             <Navbar />
@@ -22,7 +25,8 @@ const Home = () => {
             <div className="bg-white pt-10 flex flex-col items-center justify-center text-center pb-10 px-4 md:px-20">
                 <h1 className="text-3xl md:text-5xl font-extrabold font-montserrat">Start Your Journey With Us.</h1>
                 <h1 className="text-slate-500 text-lg md:text-2xl font-extrabold pt-4">Join our courses and get firsthand knowledge about web and web3.</h1>
-                <button className="mt-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-2xl px-8 py-4 text-lg md:text-2xl font-bold text-white">
+                <button onClick={handleViewCoursesClick}
+                className="mt-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-2xl px-8 py-4 text-lg md:text-2xl font-bold text-white">
                     View Courses
                 </button>
             </div>
