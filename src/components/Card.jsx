@@ -1,16 +1,24 @@
 import React from 'react';
 import { useModal } from '../context/modal-context';
-
+import { useLocation } from 'react-router-dom';
 const Card = ({data}) => {
-
+    const location = useLocation()
     const {title,description,imageUrl,price,_id} = data
     const {modalDispatch} = useModal()
-    const handleBuyNowClick = (id) =>{
-        modalDispatch({
-            type:"OPEN_PURCHASE_MODAL",
-            payload:id
-        })
-    }
+    const handleBuyNowClick = (id) => {
+      console.log("ID passed to handler:", id); // Debugging line
+      if (location.pathname === '/courses') {
+          modalDispatch({
+              type: "OPEN_SIGNIN_MODAL"
+          });
+      } else {
+          modalDispatch({
+              type: "OPEN_PURCHASE_MODAL",
+              payload: id // Ensure this is a string
+          });
+      }
+  };
+  
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       
