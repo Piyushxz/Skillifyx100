@@ -1,13 +1,27 @@
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
+import axios from "axios";
+import Card from "../components/Card";
+import { useEffect,useState } from "react";
 const User = () => {
+    const [courses, setCourses] = useState([]);
 
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get('http://localhost:3002/course/preview');
+                console.log(response.data);
+                setCourses(response.data.courses);
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        })();
+    }, []);
 
     return (
         <>
             <Sidebar />
-            <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 lg:px-12 py-4 bg-white">
+            <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 lg:px-12 py-4 bg-white border-b-4 border-indigo-500">
                 <div className="font-montserrat mb-4 md:mb-0 ml-4 mt-2">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black pl-4 ">
                         Coursera
@@ -32,6 +46,19 @@ const User = () => {
                     </button>
                 </div>
             </div>
+
+            
+                
+            <div className="flex flex-wrap pl-20 bg-stone-100">
+
+
+                    {courses.map(course => (
+                        <div key={course._id} className="m-4 "> 
+                            <Card data={course} />
+                        </div>
+                    ))}
+            </div>
+            
         </>
     );
 };

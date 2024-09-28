@@ -1,13 +1,47 @@
 import React, { useState } from 'react';
 import { useModal } from '../context/modal-context';
+import axios from "axios"
 
 const SignInModal = () => {
     const {modalDispatch} = useModal()
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const [tokenVal,setTokenVal] = useState(null)
+
     const closeModal = () =>{
         modalDispatch({
             type:"OPEN_SIGNIN_MODAL"
         })
     }
+
+    const handleEmailChange = (e) =>{
+      setEmail(e.target.value)
+    }
+    const handlePasswordChange = (e) =>{
+      setPassword(e.target.value)
+    }
+
+    const handleSignInClick = async () =>{
+
+      try{
+        const response = await axios.post("http://localhost:3002/user/signin",{
+          email,
+          password
+        })
+
+        console.log(response)
+
+        setTokenVal(response.data.token)
+        if(tokenVal){
+          localStorage.setItem("token",response.data.token)
+        }
+        
+      }catch(e){
+        console.log("Could Not SignIn")
+      }
+
+    }
+    console.log(email,password)
   return (
     <>
 
@@ -54,13 +88,15 @@ const SignInModal = () => {
                 
                     <form>
 
-                        <div class="mb-6">
+                        <div className="mb-6">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
-                            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
+                            <input onChange={handleEmailChange}
+                             type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
                         </div> 
-                        <div class="mb-6">
+                        <div className="mb-6">
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
+                            <input onChange={handlePasswordChange}
+                             type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
                         </div> 
                     </form>
 
@@ -68,17 +104,17 @@ const SignInModal = () => {
               <div className="flex justify-center items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
 
                 <button
-             
+                  onClick={handleSignInClick}
                   className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                 >
                     Submit
                 </button>
                 <button
-             
-             className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-           >
+                
+                className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                >
                Auto Sign In as User
-           </button>
+              </button>
            <button
              
              className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -89,7 +125,8 @@ const SignInModal = () => {
             </div>
           </div>
         </div>
-      
+
+
     </>
   );
 };
