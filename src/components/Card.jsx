@@ -6,7 +6,7 @@ const Card = ({data}) => {
     const {title,description,imageUrl,price,_id} = data
     const {modalDispatch} = useModal()
     const handleBuyNowClick = (id) => {
-      console.log("ID passed to handler:", id); // Debugging line
+      console.log("ID passed to handler:", id); 
       if (location.pathname === '/courses') {
           modalDispatch({
               type: "OPEN_SIGNIN_MODAL"
@@ -14,7 +14,7 @@ const Card = ({data}) => {
       } else {
           modalDispatch({
               type: "OPEN_PURCHASE_MODAL",
-              payload: id // Ensure this is a string
+              payload: id 
           });
       }
   };
@@ -43,9 +43,9 @@ const Card = ({data}) => {
         </p>
         <button
           onClick={()=>handleBuyNowClick(_id)}
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-400 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className={`inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white ${location.pathname === '/purchases' ? "bg-blue-200" :"bg-green-400"} rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
         >
-          Buy Now
+          {location.pathname === '/purchases' ? "View Content" : "Buy Now"}
           <svg
             className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
             aria-hidden="true"

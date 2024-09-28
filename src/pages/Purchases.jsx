@@ -1,7 +1,26 @@
 import Sidebar from "../components/Sidebar"
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "../components/Card";
 const Purchases = () =>{
     const username = localStorage.getItem("username")
+    const token = localStorage.getItem("token")
+    const [purchases,setPurchases] = useState([])
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get('http://localhost:3002/user/purchases',{
+                    headers:{
+                        token: token
+                    }
+                });
+                console.log(response.data);
+                setPurchases(response.data.courses);
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        })();
+    }, []);
     return(
         <>
             <Sidebar />
@@ -34,8 +53,18 @@ const Purchases = () =>{
             
             <div className="font-montserrat mb-4 md:mb-0 ml-16 mt-4">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black pl-4 ">
-                    Welcome {username},Your Courses
+                    Your Courses,
                     </h1>
+            </div>
+            
+            <div className="flex flex-wrap pl-20 ">
+
+
+                {purchases.map(course => (
+                    <div key={course._id} className="m-4 "> 
+                        <Card data={course} />
+                    </div>
+                ))}
             </div>
         </>
     )
