@@ -13,10 +13,18 @@ const modalReducer = (state,{type,payload}) =>{
                     isSignUpModalOpen : !state.isSignUpModalOpen
                 }
 
-        case "SET_ACTIVE_USERNAME":
+        case "OPEN_PURCHASE_MODAL":
                 return{
                     ...state,
-                    acticeUsername : payload
+                    isPurchaseModalOpen : true,
+                    id:payload
+
+                }
+        case "CLOSE_PURCHASE_MODAL":
+                return{
+                    ...state,
+                    isPurchaseModalOpen:false,
+                    id:null
                 }
         default:
             return state

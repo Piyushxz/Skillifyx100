@@ -4,7 +4,10 @@ import axios from "axios";
 import Card from "../components/Card";
 import { useEffect,useState } from "react";
 import { useModal } from "../context/modal-context";
+import PurchaseModal from "../components/PurchaseModal";
 const User = () => {
+
+    const {isPurchaseModalOpen} = useModal()
     const [courses, setCourses] = useState([]);
     const username = localStorage.getItem("username")
     useEffect(() => {
@@ -20,6 +23,10 @@ const User = () => {
     }, []);
     return (
         <>
+            {
+                isPurchaseModalOpen &&
+                <PurchaseModal/>
+            }
             <Sidebar />
             <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 lg:px-12 py-4 bg-white border-b-4 border-indigo-500">
                 <div className="font-montserrat mb-4 md:mb-0 ml-4 mt-2">
