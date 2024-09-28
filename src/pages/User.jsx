@@ -3,9 +3,10 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import Card from "../components/Card";
 import { useEffect,useState } from "react";
+import { useModal } from "../context/modal-context";
 const User = () => {
     const [courses, setCourses] = useState([]);
-
+    const username = localStorage.getItem("username")
     useEffect(() => {
         (async () => {
             try {
@@ -17,7 +18,6 @@ const User = () => {
             }
         })();
     }, []);
-
     return (
         <>
             <Sidebar />
@@ -48,8 +48,12 @@ const User = () => {
             </div>
 
             
-                
-            <div className="flex flex-wrap pl-20 bg-stone-100">
+            <div className="font-montserrat mb-4 md:mb-0 ml-16 mt-4">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black pl-4 ">
+                    Welcome {username},
+                    </h1>
+                </div>
+            <div className="flex flex-wrap pl-20 ">
 
 
                     {courses.map(course => (
@@ -58,7 +62,7 @@ const User = () => {
                         </div>
                     ))}
             </div>
-            
+
         </>
     );
 };

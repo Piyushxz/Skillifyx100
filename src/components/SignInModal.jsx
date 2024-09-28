@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useModal } from '../context/modal-context';
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 const SignInModal = () => {
+    const navigate = useNavigate()
     const {modalDispatch} = useModal()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [tokenVal,setTokenVal] = useState(null)
+    const [user,setUser] = useState(null)
 
     const closeModal = () =>{
         modalDispatch({
@@ -32,8 +35,17 @@ const SignInModal = () => {
         console.log(response)
 
         setTokenVal(response.data.token)
+        setUser(response.data.username)
+    
         if(tokenVal){
-          localStorage.setItem("token",response.data.token)
+          localStorage.setItem("token",tokenVal)
+          localStorage.setItem("username",user)
+          navigate("/user")
+
+          modalDispatch({
+            type:"OPEN_SIGNIN_MODAL"
+        })
+
         }
         
       }catch(e){
@@ -41,7 +53,7 @@ const SignInModal = () => {
       }
 
     }
-    console.log(email,password)
+
   return (
     <>
 
