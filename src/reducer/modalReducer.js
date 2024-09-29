@@ -26,6 +26,11 @@ const modalReducer = (state,{type,payload}) =>{
                     isPurchaseModalOpen:false,
                     id:null
                 }
+        case "OPEN_ALERT":
+                return{
+                    ...state,
+                    isAlertVisible:!state.isAlertVisible
+                }
         default:
             return state
     }

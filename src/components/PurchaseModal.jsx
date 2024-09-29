@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useModal } from '../context/modal-context';
 import axios from 'axios';
-import Alert from './Alert'; // Import the Alert component
+import Alert from './Alert'; 
+
 
 const PurchaseModal = () => {
     const { modalDispatch, id } = useModal();
     const [course, setCourse] = useState({});
     const [alert, setAlert] = useState({ visible: false, message: '', type: 'success' });
-
+    const token = localStorage.getItem("token")
     const handleModalClose = () => {
         modalDispatch({ type: "CLOSE_PURCHASE_MODAL" });
     };
@@ -24,24 +25,38 @@ const PurchaseModal = () => {
     }, [id]);
 
     const handlePurchaseCourse = async () => {
-        try{
+        try {
+             const response = await axios.post("http://localhost:3002/course/purchase", {
+               courseId: id
+             }, {
+                 headers: {
+                     token:token
+                }
+             });
+    
+             console.log(response);
+             
             setAlert({ visible: true, message: `Successfully purchased ${course.title}!`, type: 'success' });
-        }catch(e){
-
+            setTimeout(()=>{modalDispatch({ type: "CLOSE_PURCHASE_MODAL" });},1000)
+        } catch (e) {
+            console.log("Could not purchase", e);
+            setAlert({ visible: true, message: "Could not complete the purchase. Please try again.", type: 'error' });
         }
-        
     };
+    
 
     return (
         <>
-            {/* Alert component */}
-            {alert.visible && <Alert message={alert.message} type={alert.type} duration={3000} />}
-
+         
+ 
             <div
                 id="popup-modal"
                 tabIndex="-1"
                 className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full overflow-y-auto overflow-x-hidden bg-black bg-opacity-50"
-            >
+                
+         
+           >
+                {alert.visible && <Alert message={alert.message} type={alert.type} duration={3000} />}
                 <div className="relative p-4 w-full max-w-md max-h-full">
                     <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <button

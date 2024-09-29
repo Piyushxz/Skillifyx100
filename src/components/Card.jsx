@@ -11,7 +11,13 @@ const Card = ({data}) => {
           modalDispatch({
               type: "OPEN_SIGNIN_MODAL"
           });
-      } else {
+
+      }else if(location.pathname==="/purchases"){
+          modalDispatch({
+            
+          })
+      }
+      else{
           modalDispatch({
               type: "OPEN_PURCHASE_MODAL",
               payload: id 
