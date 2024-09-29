@@ -16,7 +16,7 @@ const Alert = ({ message, type = "success", duration = 300 }) => {
     const alertStyles = {
         success: "text-green-800 border-green-300 bg-green-50",
         error: "text-red-800 border-red-300 bg-red-50",
-        // Add more types as needed
+       
     };
 
     return (

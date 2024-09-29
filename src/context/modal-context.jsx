@@ -9,7 +9,8 @@ const initialValue = {
     isSignUpModalOpen:false,
     isPurchaseModalOpen:false,
     id:null,
-    isAlertVisible:false
+    isAlertVisible:false,
+    isAddCourseModalOpen:false
 }
 
 
@@ -18,10 +19,10 @@ const ModalContext = createContext(initialValue)
 
 const ModalProvider = ({children}) =>{
 
-    const [{isSignInModalOpen,isSignUpModalOpen,isPurchaseModalOpen,id,isAlertVisible},modalDispatch] = useReducer(modalReducer,initialValue)
+    const [{isSignInModalOpen,isSignUpModalOpen,isPurchaseModalOpen,id,isAlertVisible,isAddCourseModalOpen},modalDispatch] = useReducer(modalReducer,initialValue)
 
     return (
-        <ModalContext.Provider value={{isSignInModalOpen,isSignUpModalOpen,isPurchaseModalOpen,id,isAlertVisible,modalDispatch}}>
+        <ModalContext.Provider value={{isSignInModalOpen,isSignUpModalOpen,isPurchaseModalOpen,id,isAlertVisible,isAddCourseModalOpen,modalDispatch}}>
             {children}
         </ModalContext.Provider>
     )

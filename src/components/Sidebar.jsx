@@ -29,7 +29,7 @@ const Sidebar = () => {
   }
   return (
     <>
-      {/* Button to open/close the sidebar */}
+    
       <button
         data-drawer-target="default-sidebar"
         data-drawer-toggle="default-sidebar"
@@ -37,8 +37,8 @@ const Sidebar = () => {
         type="button"
         onClick={toggleSidebar}
         className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-        style={{ position: 'fixed', top: '20px', left: '20px', zIndex: '50' }}  // Added fixed positioning and z-index for visibility
-      >
+        style={{ position: 'fixed', top: '20px', left: '20px', zIndex: '50' }} 
+        >
         <span className="sr-only">Open sidebar</span>
         <svg
           className="w-6 h-6"

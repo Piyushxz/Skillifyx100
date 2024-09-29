@@ -31,6 +31,12 @@ const modalReducer = (state,{type,payload}) =>{
                     ...state,
                     isAlertVisible:!state.isAlertVisible
                 }
+
+        case "OPEN_ADDCOURSE_MODAL":
+                return{
+                    ...state,
+                    isAddCourseModalOpen:!state.isAddCourseModalOpen
+                }
         default:
             return state
     }
