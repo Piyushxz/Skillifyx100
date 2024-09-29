@@ -1,10 +1,31 @@
 import AdminSidebar from "../components/AdminSidebar"
 import { useModal } from "../context/modal-context"
 import Modal from "../components/AddCourseFormModal"
+import { useState,useEffect } from "react"
+import axios from "axios"
+import Card from "../components/Card"
 
 const Admin = ()=>{
     const username = localStorage.getItem("username")
+    const token = localStorage.getItem("token")
     const {isAddCourseModalOpen} = useModal()
+    const [courses, setCourses] = useState([]);
+    
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get('http://localhost:3002/admin/bulk/course',{
+                    headers:{
+                        token:token
+                    }
+                });
+                console.log(response.data);
+                setCourses(response.data.courses);
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        })();
+    }, []);
     return(
         <>
             <AdminSidebar/>
@@ -48,7 +69,16 @@ const Admin = ()=>{
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black pl-4 ">
                     Welcome {username},
                     </h1>
-                </div>
+            </div>
+            <div className="flex flex-wrap pl-20 ">
+
+
+                {courses.map(course => (
+                    <div key={course._id} className="m-4 "> 
+                        <Card data={course} />
+                    </div>
+                ))}
+            </div>
         </>
     )
 }

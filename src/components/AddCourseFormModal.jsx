@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useModal } from '../context/modal-context';
+import axios from 'axios';
 
 const Modal = () => {
     const {modalDispatch} = useModal()
@@ -7,6 +8,9 @@ const Modal = () => {
     const [description,setDescription] = useState('')
     const [price,setPrice] = useState('')
     const [ImageURL,setImageURL] = useState('')
+
+    const token = localStorage.getItem("token")
+
     const closeModal = () =>{
         modalDispatch({
             type:"OPEN_ADDCOURSE_MODAL"
@@ -26,8 +30,29 @@ const Modal = () => {
     const handleImageURLChange = (e) =>{
         setImageURL(e.target.value)
     }
-    const handleAddCourseClick = (e)=>{
-        e.preventDefault();
+    const handleAddCourseClick = async (e)=>{
+        console.log(title,description,price,ImageURL)
+        try{
+            const response = await axios.post("http://localhost:3002/admin/course",{
+                title,
+                description,
+                price,
+                imageUrl:ImageURL
+            },
+            {
+                headers:{
+                    token:token
+                }
+            }
+        )
+
+            console.log(response)
+            modalDispatch({
+                type:"OPEN_ADDCOURSE_MODAL"
+            })
+        }catch(e){
+            console.log("Could not add course")
+        }
     }
   return (
     <>
@@ -73,7 +98,7 @@ const Modal = () => {
               {/* Modal body */}
               <div className="p-4 md:p-5 space-y-4">
                 
-                    <form onSubmit={handleAddCourseClick}>
+                    <form >
                        
                         <div class="mb-6">
                             <label htmlFor={title} class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course Title</label>
@@ -103,7 +128,7 @@ const Modal = () => {
               <div className="flex justify-center items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
 
                 <button
-             
+                    onClick={handleAddCourseClick}
                   className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                 >
                     Add Course
