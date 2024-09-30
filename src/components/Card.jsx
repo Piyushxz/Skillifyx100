@@ -13,9 +13,13 @@ const Card = ({data}) => {
           });
 
       }else if(location.pathname==="/purchases"){
-          modalDispatch({
-            
-          })
+          modalDispatch({})
+      }
+      else if(location.pathname=== '/admin'){
+        modalDispatch({
+          type:"OPEN_UPDATE_MODAL",
+          payload:id
+        })
       }
       else{
           modalDispatch({
@@ -47,11 +51,15 @@ const Card = ({data}) => {
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
            Price :₹{price} 
         </p>
-        <button
-          onClick={()=>handleBuyNowClick(_id)}
-          className={`inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white ${location.pathname === '/purchases' ? "bg-blue-200" :"bg-green-400"} rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+                <button
+          onClick={() => handleBuyNowClick(_id)}
+          className={`inline-flex items-center px-3 py-2 mt-6 text-sm font-medium text-center text-white ${location.pathname === '/purchases' ? "bg-blue-200" : "bg-green-400"} rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
         >
-          {location.pathname === '/purchases' ? "View Content" : "Buy Now"}
+          {location.pathname === '/purchases'
+            ? "View Content"
+            : location.pathname === '/admin'
+            ? "Update Course"
+            : "Buy Now"}
           <svg
             className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
             aria-hidden="true"
@@ -68,6 +76,7 @@ const Card = ({data}) => {
             />
           </svg>
         </button>
+
       </div>
     </div>
   );

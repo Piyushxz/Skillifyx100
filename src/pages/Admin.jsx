@@ -4,11 +4,11 @@ import Modal from "../components/AddCourseFormModal"
 import { useState,useEffect } from "react"
 import axios from "axios"
 import Card from "../components/Card"
-
+import UpdateModal from "../components/UpdateCourseModal"
 const Admin = ()=>{
     const username = localStorage.getItem("username")
     const token = localStorage.getItem("token")
-    const {isAddCourseModalOpen} = useModal()
+    const {isAddCourseModalOpen,isUpdateCourseModalOpen,courseUpdated} = useModal()
     const [courses, setCourses] = useState([]);
     
     useEffect(() => {
@@ -25,13 +25,19 @@ const Admin = ()=>{
                 console.error('Error fetching courses:', error);
             }
         })();
-    }, []);
+    }, [courseUpdated]);
+
+    
     return(
         <>
             <AdminSidebar/>
             {
                 isAddCourseModalOpen &&
                 <Modal/>
+            }
+            {
+                isUpdateCourseModalOpen &&
+                <UpdateModal/>
             }
                     <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 lg:px-12 py-4 bg-white border-b-4 border-indigo-500">
                 <div className="font-montserrat mb-4 md:mb-0 ml-4 mt-2">
