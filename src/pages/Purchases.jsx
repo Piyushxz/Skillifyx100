@@ -27,7 +27,7 @@ const Purchases = () =>{
             <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 lg:px-12 py-4 bg-white border-b-4 border-indigo-500">
                 <div className="font-montserrat mb-4 md:mb-0 ml-4 mt-2">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black pl-4 ">
-                        Coursera
+                        Skillifyx100
                     </h1>
             </div>
 

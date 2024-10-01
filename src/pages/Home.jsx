@@ -86,8 +86,13 @@ const Home = () => {
 
                         </div>
                 </div>
+
+
             </div>
-            
+            <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex justify-center items-center h-16">
+                <span className="font-montserrat text-white">© 2024 All Rights Reserved.</span>
+            </div>
+
 
 
 
