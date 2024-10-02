@@ -57,7 +57,7 @@ const UpdateModal = () => {
     const handleAddUpdateClick = async (e)=>{
         console.log(title,description,price,ImageURL)
         try{
-            const response = await axios.put("http://localhost:3002/admin/course",{
+            const response = await axios.put("https://coursesellingappbackend.onrender.com/admin/course",{
                 title,
                 description,
                 price,
