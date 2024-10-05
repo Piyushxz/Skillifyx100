@@ -17,7 +17,7 @@ const UpdateModal = () => {
 
     useEffect(()=>{(async ()=>{
             try{
-                const response =  await axios.get("http://localhost:3002/course", { params: { id: id } })
+                const response =  await axios.get("https://coursesellingappbackend.onrender.com/course", { params: { id: id } })
 
                 console.log(response.data)
                 setTitle(response.data.title)
