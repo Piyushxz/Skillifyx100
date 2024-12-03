@@ -13,7 +13,7 @@ const User = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('https://coursesellingappbackend.onrender.com/course/preview');
+                const response = await axios.get('https://coursesellingappbackend-beju.onrender.com/course/preview');
                 console.log(response.data);
                 setCourses(response.data.courses);
             } catch (error) {

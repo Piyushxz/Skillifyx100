@@ -24,87 +24,77 @@ const SignInModal = () => {
       setPassword(e.target.value)
     }
 
-    const handleAutoSignInAsUserClick = async ()=>{
-      try{
-        const response = await axios.post("https://coursesellingappbackend.onrender.com/user/signin",{
-          email:"test@gmail.com",
-          password:"Piyush@12"
-        })
-
-        console.log(response)
-
-        setTokenVal(response.data.token)
-        setUser(response.data.username)
-    
-        if(tokenVal){
-          localStorage.setItem("token",tokenVal)
-        
-          localStorage.setItem("username",user)
-          navigate("/user")
-
-          modalDispatch({
-            type:"OPEN_SIGNIN_MODAL"
-        })
-
-        }
-        
-      }catch(e){
-        console.log("Could Not SignIn")
-      }
-
-    }
-    const handleSignInClick = async () =>{
-      try{
-        const response = await axios.post("https://coursesellingappbackend.onrender.com/user/signin",{
+    const handleSignInClick = async () => {
+      try {
+        const response = await axios.post("https://coursesellingappbackend-beju.onrender.com/user/signin", {
           email,
-          
           password
-        })
-        setTokenVal(response.data.token)
-        setUser(response.data.username)
-        
-        if(tokenVal){
-          localStorage.setItem("token",tokenVal)
-        
-          localStorage.setItem("username",user)
-          navigate("/user")
-
+        });
+        const token = response.data.token;
+        const username = response.data.username;
+    
+        if (token) {
+          localStorage.setItem("token", token);
+          localStorage.setItem("username", username);
+          navigate("/user");
+    
           modalDispatch({
-            type:"OPEN_SIGNIN_MODAL"
-        })
-
+            type: "OPEN_SIGNIN_MODAL"
+          });
         }
+      } catch (e) {
+        console.log("Could not signin");
+        console.log(e);
       }
-      catch(e){
-        console.log(e)
-      }
-
-    }
-    const handleAutoSignInClick = async () =>{
-      try{
-        const response = await axios.post("https://coursesellingappbackend.onrender.com/admin/signin",{
-          email:"a@gmail.com",
-          password:"2323"
-        })
-        setTokenVal(response.data.token)
-        setUser(response.data.username)
-        
-        if(tokenVal){
-          localStorage.setItem("token",tokenVal)
-        
-          localStorage.setItem("username",user)
-          navigate("/admin")
-
+    };
+    
+    const handleAutoSignInAsUserClick = async () => {
+      try {
+        const response = await axios.post("https://coursesellingappbackend-beju.onrender.com/user/signin", {
+          email: "testuser2@gmail.com",
+          password: "Piyush@12"
+        });
+        const token = response.data.token;
+        const username = response.data.username;
+    
+        if (token) {
+          localStorage.setItem("token", token);
+          localStorage.setItem("username", username);
+          navigate("/user");
+    
           modalDispatch({
-            type:"OPEN_SIGNIN_MODAL"
-        })
-
+            type: "OPEN_SIGNIN_MODAL"
+          });
         }
+      } catch (e) {
+        console.log("Could Not SignIn");
+        console.log(e);
       }
-      catch(e){
-        console.log(e)
+    };
+    
+    const handleAutoSignInClick = async () => {
+      try {
+        const response = await axios.post("https://coursesellingappbackend-beju.onrender.com/admin/signin", {
+          email: "a@gmail.com",
+          password: "2323"
+        });
+        const token = response.data.token;
+        const username = response.data.username;
+    
+        if (token) {
+          localStorage.setItem("token", token);
+          localStorage.setItem("username", username);
+          navigate("/admin");
+    
+          modalDispatch({
+            type: "OPEN_SIGNIN_MODAL"
+          });
+        }
+      } catch (e) {
+        console.log(e);
       }
-    }
+    };
+    
   return (
     <>
 

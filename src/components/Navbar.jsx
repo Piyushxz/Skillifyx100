@@ -1,10 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useModal } from "../context/modal-context";
 
 const Navbar = () => {
 
 
     const {modalDispatch} = useModal()
-
+    const navigate = useNavigate()
     const handleSignUpClick = () =>{
         modalDispatch({
             type:"OPEN_SIGNUP_MODAL"
@@ -20,7 +21,7 @@ const Navbar = () => {
     return (
         <>
             <div className="flex flex-col md:flex-row justify-between px-6 md:px-12 py-4 bg-white items-center">
-                <div className="font-montserrat mb-4 md:mb-0">
+                <div className="font-montserrat mb-4 md:mb-0 cursor-pointer" onClick={()=>navigate("/")}>
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black">
                     Skillifyx100
                     </h1>

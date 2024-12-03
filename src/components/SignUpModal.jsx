@@ -25,7 +25,7 @@ const Modal = () => {
 
     const handleSignUpClick = async () => {
         try {
-            const response = await axios.post('https://coursesellingappbackend.onrender.com/user/signup', {
+            const response = await axios.post('https://coursesellingappbackend-beju.onrender.com/user/signup', {
                 username,
                 email,
                 password

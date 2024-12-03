@@ -14,7 +14,7 @@ const Admin = ()=>{
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('https://coursesellingappbackend.onrender.com/admin/bulk/course',{
+                const response = await axios.get('https://coursesellingappbackend-beju.onrender.com/admin/bulk/course',{
                     headers:{
                         token:token
                     }

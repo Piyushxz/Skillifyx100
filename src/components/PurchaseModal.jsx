@@ -16,7 +16,7 @@ const PurchaseModal = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get("https://coursesellingappbackend.onrender.com/course", { params: { id: id } });
+                const response = await axios.get("https://coursesellingappbackend-beju.onrender.com/course", { params: { id: id } });
                 setCourse(response.data);
             } catch (e) {
                 console.log("Could not get course");
